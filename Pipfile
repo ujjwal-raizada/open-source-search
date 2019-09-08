@@ -7,6 +7,7 @@ verify_ssl = true
 
 [packages]
 sortedcontainers = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.7"
