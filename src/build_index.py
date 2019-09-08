@@ -2,6 +2,7 @@ import pickle
 import pathlib
 
 from sortedcontainers import SortedSet
+from utils import * 
 
 class Index:
 
@@ -53,18 +54,18 @@ class Index:
 
     def load_index(self):
 
-        db_path = pathlib.Path('indexes/' + self.db_name)
+        db_path = pathlib.Path(INDEX_PATH + self.db_name)
 
         if not db_path.exists():
             self.dump_index()
 
-        with open('indexes/' + self.db_name, 'rb') as file:
+        with open(INDEX_PATH + self.db_name, 'rb') as file:
             self.__inverted_index = pickle.load(file)
             print ("Index Load Successful.")
 
     def dump_index(self):
 
-        with open('indexes/' + self.db_name, 'wb') as file:
+        with open(INDEX_PATH + self.db_name, 'wb') as file:
             pickle.dump(self.__inverted_index, file)
             print ("Inverted Index Dumped Successfully.")
 

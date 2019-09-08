@@ -9,8 +9,8 @@ def save_parse_file(document):
     @params:
         document: String containing parsed file name
     """
-    if os.path.exists(os.path.join(STORE, PARSED_DOC_FILE)):
-        with open(os.path.join(STORE, PARSED_DOC_FILE), 'rb') as f :
+    if os.path.exists(os.path.join(INDEX_PATH, PARSED_DOC_FILE)):
+        with open(os.path.join(INDEX_PATH, PARSED_DOC_FILE), 'rb') as f :
             parsed_doc_list = pickle.load(f)
     else :
         parsed_doc_list = []
@@ -18,7 +18,7 @@ def save_parse_file(document):
     if (document not in parsed_doc_list) :
         parsed_doc_list.append(document)
     
-    with open(os.path.join(STORE, PARSED_DOC_FILE), 'wb') as f:
+    with open(os.path.join(INDEX_PATH, PARSED_DOC_FILE), 'wb') as f:
         pickle.dump(parsed_doc_list, f)
     
 
