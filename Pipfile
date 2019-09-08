@@ -8,6 +8,9 @@ verify_ssl = true
 [packages]
 sortedcontainers = "*"
 nltk = "*"
+pydoc = "*"
+sphinx = "*"
+pdoc3 = "*"
 
 [requires]
 python_version = "3.7"
