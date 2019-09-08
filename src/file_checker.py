@@ -26,10 +26,9 @@ def check_new():
         return resp
 
     try:
-        with open(os.path.join(STORE, PARSED_DOC_FILE), 'rb') as f:
+        with open(os.path.join(INDEX_PATH, PARSED_DOC_FILE), 'rb') as f:
             parsed_doc = pickle.load(f)
     except:
-        # File doesn't exist
         print ("Binary file doesn't exists")
         parsed_doc = []
 
@@ -49,4 +48,3 @@ def check_new():
 
 if __name__ == "__main__":
     print (check_new())
-
