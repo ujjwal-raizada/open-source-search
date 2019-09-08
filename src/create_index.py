@@ -14,7 +14,8 @@ def create_index(doc_token):
     for doc_name, word_freq in doc_token.items():
         obj.update_index(doc_name, word_freq)
 
-    #print(obj.get_compound_result(['foundat']))
+    # print(obj.print_index())
+    # print(obj.get_compound_result(['java']))
 
 
 def get_doc_tokens():

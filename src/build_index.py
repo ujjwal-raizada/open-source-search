@@ -1,6 +1,8 @@
 import pickle
 import pathlib
 
+import nltk
+
 from sortedcontainers import SortedSet
 from utils import * 
 
@@ -45,10 +47,11 @@ class Index:
 
     def get_compound_result(self, keyword_list, num_of_result = 5):
 
-        result = self.get_result(keyword_list[0], num_of_result)
+        ps = nltk.PorterStemmer()
+        result = self.get_result(ps.stem(keyword_list[0]), num_of_result)
 
         for keyword in keyword_list:
-            result = self.get_result(keyword, num_of_result) & result
+            result = self.get_result(ps.stem(keyword), num_of_result) & result
 
         return result
 
