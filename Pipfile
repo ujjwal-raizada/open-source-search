@@ -8,7 +8,6 @@ verify_ssl = true
 [packages]
 sortedcontainers = "*"
 nltk = "*"
-pydoc = "*"
 sphinx = "*"
 pdoc3 = "*"
 
