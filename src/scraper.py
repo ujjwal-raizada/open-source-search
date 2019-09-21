@@ -5,6 +5,16 @@ from bs4 import BeautifulSoup
 import utils
 
 def get_document(repo_id):
+    '''
+    Downloads README file from the Github trending repositories and 
+    saves in the directory specified in CORPUS. 
+
+    :param 
+        repo_id: String of the form <username>/<repoName>
+    :return
+        Integer denoting the status of exit (0 for success and 1 otherwise)
+    '''
+
     repo_url = "https://www.github.com/" + (repo_id)
     resp = requests.get(url=repo_url)
 
@@ -40,6 +50,17 @@ def get_document(repo_id):
 
 
 def get_repo_list(site, index):
+    '''
+    Used for getting the repositories in the pageIndex provided by index variable.
+    Then calls get_document function to download README.
+
+    :param
+        site: String containing the site url
+        index: Integer used in paging of the site_url
+
+    :return
+        Integer denoting the status of exit (0 for success and 1 otherwise)
+    '''
     resp = requests.get(site.format(index), timeout=20)
 
     if (resp.status_code == 200):
@@ -79,6 +100,10 @@ def get_repo_list(site, index):
 
 
 def scrape_site():
+    '''
+    Wrapper function for scraping github site.
+    utils.sites is a list of urls which are being scraped.
+    '''
     for site in utils.sites:
         pageIndex = 1
         while (get_repo_list(site, pageIndex) == 1):
