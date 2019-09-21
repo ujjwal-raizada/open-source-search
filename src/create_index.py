@@ -2,6 +2,7 @@ from file_checker import check_new
 from file_sender import send_file
 from preprocessing import preprocess
 from build_index import Index
+from scraper import scrape_site
 
 def create_index(doc_token):
     """
@@ -42,4 +43,5 @@ def get_doc_tokens():
 
 
 if __name__ == '__main__':
+    scrape_site()
     get_doc_tokens()
