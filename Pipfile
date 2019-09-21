@@ -10,7 +10,6 @@ sortedcontainers = "*"
 nltk = "*"
 sphinx = "*"
 pdoc3 = "*"
-textract = "*"
 requests = "*"
 beautifulsoup4 = "*"
 
