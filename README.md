@@ -28,7 +28,7 @@ cd src/
 * Create a python terminal to install **nltk** dependencies 
 ```python
 >>> import nltk
->>> nltk.download('pukt')
+>>> nltk.download('punkt')
 >>> nltk.download('stopwords')
 >>> exit()
 ```
