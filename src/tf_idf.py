@@ -1,8 +1,34 @@
 from nltk import *
 from nltk.corpus import stopwords
 from collections import Counter
+
 import math
 import numpy as np
+import os
+
+from utils import *
+
+
+def fetch_documents():
+    """
+    Gets the list of documents and their associated data from the text files in the corpus folder
+    :return array containing data associated with each file in each index, in a sorted fashion
+    """
+    
+    # List of documents
+    file_dir = os.listdir(CORPUS)
+    file_dir.sort()
+    documents = []
+
+    #Save text associated with each file in the array
+    for path in file_dir:
+        reader = open(os.path.join(CORPUS, path))
+        text = ""
+        for line in reader:
+            text += line
+        documents.append(text)
+
+    return documents
 
 
 def preprocess(text):
@@ -34,13 +60,27 @@ def preprocess(text):
     return words_stemmed
 
 
-def calculate_tfidf(query, documents):
+def calculate_tfidf(query):
     """
     Calculates the tf-idf score between the query and each document and returns them
     :param query: The text which is to be compared with other documents
     :param documents: An array of documents
     :return An array containing scores based on comparision of query with each document
     """    
+
+    #Get the list of documents and their data
+    documents = fetch_documents()
+
+    #Preprocess Documents
+    preprocessed_documents = []
+    for document in documents:
+        preprocessed_documents.append(preprocess(document))
+
+    #Preprocess Query
+    preprocessed_query = preprocess(query)
+
+    query = preprocessed_query
+    documents = preprocessed_documents
 
     #Find the list of unique words in the document
     list_of_words = []
@@ -114,13 +154,5 @@ def calculate_tfidf(query, documents):
 
 
 if __name__ == "__main__":
-    query = "There are a lot of people on the bus"
-    documents = ["The bus is full of people", "We are going on a vacation", "The bus is red in color"]
-    
-    preprocessed_query = preprocess(query)
-    preprocessed_documents = []
-
-    for document in documents:
-        preprocessed_documents.append(preprocess(document))
-
-    print(calculate_tfidf(preprocessed_query, preprocessed_documents))
+    query = 'awesome'
+    print(calculate_tfidf(query))
