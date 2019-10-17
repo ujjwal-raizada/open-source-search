@@ -27,6 +27,7 @@ def fetch_documents():
         for line in reader:
             text += line
         documents.append(text)
+        reader.close()
 
     return documents
 
