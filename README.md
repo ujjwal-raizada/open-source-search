@@ -19,11 +19,10 @@ git clone https://www.github.com/PranjalGupta2199/open-source-search.git
 ```bash
 cd open-source-search
 ```
-* Create and install the dependencies using **Pipenv** and move to the **src/** directory
+* Create and install the dependencies using **Pipenv**.
 ```bash
 pipenv install
 pipenv shell
-cd src/
 ```
 * Create a python terminal to install **nltk** dependencies 
 ```python
