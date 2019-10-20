@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module scraper</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>scraper</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/pranjal/Python/Projects/open-source-search/src/scraper.py">/home/pranjal/Python/Projects/open-source-search/src/scraper.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="requests.html">requests</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="utils.html">utils</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_document"><strong>get_document</strong></a>(repo_id)</dt><dd><tt>Downloads&nbsp;README&nbsp;file&nbsp;from&nbsp;the&nbsp;Github&nbsp;trending&nbsp;repositories&nbsp;and&nbsp;<br>
+saves&nbsp;in&nbsp;the&nbsp;directory&nbsp;specified&nbsp;in&nbsp;CORPUS.&nbsp;<br>
+&nbsp;<br>
+:param&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;repo_id:&nbsp;String&nbsp;of&nbsp;the&nbsp;form&nbsp;&lt;username&gt;/&lt;repoName&gt;<br>
+:return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer&nbsp;denoting&nbsp;the&nbsp;status&nbsp;of&nbsp;exit&nbsp;(0&nbsp;for&nbsp;success&nbsp;and&nbsp;1&nbsp;otherwise)</tt></dd></dl>
+ <dl><dt><a name="-get_repo_list"><strong>get_repo_list</strong></a>(site, index)</dt><dd><tt>Used&nbsp;for&nbsp;getting&nbsp;the&nbsp;repositories&nbsp;in&nbsp;the&nbsp;pageIndex&nbsp;provided&nbsp;by&nbsp;index&nbsp;variable.<br>
+Then&nbsp;calls&nbsp;get_document&nbsp;function&nbsp;to&nbsp;download&nbsp;README.<br>
+&nbsp;<br>
+:param<br>
+&nbsp;&nbsp;&nbsp;&nbsp;site:&nbsp;String&nbsp;containing&nbsp;the&nbsp;site&nbsp;url<br>
+&nbsp;&nbsp;&nbsp;&nbsp;index:&nbsp;Integer&nbsp;used&nbsp;in&nbsp;paging&nbsp;of&nbsp;the&nbsp;site_url<br>
+&nbsp;<br>
+:return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer&nbsp;denoting&nbsp;the&nbsp;status&nbsp;of&nbsp;exit&nbsp;(0&nbsp;for&nbsp;success&nbsp;and&nbsp;1&nbsp;otherwise)</tt></dd></dl>
+ <dl><dt><a name="-scrape_site"><strong>scrape_site</strong></a>()</dt><dd><tt>Wrapper&nbsp;function&nbsp;for&nbsp;scraping&nbsp;github&nbsp;site.<br>
+utils.sites&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;urls&nbsp;which&nbsp;are&nbsp;being&nbsp;scraped.</tt></dd></dl>
+</td></tr></table>
+</body></html>
