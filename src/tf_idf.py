@@ -7,8 +7,8 @@ import math
 import numpy as np
 import os
 
-from utils import *
-from preprocessor import preprocess
+from .utils import *
+from .preprocessor import preprocess
 
 
 def fetch_documents():
