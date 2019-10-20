@@ -1,5 +1,6 @@
 from nltk import *
 from nltk.corpus import stopwords
+from nltk.corpus import wordnet
 from collections import Counter
 
 import math
@@ -30,6 +31,37 @@ def fetch_documents():
         reader.close()
 
     return documents
+
+
+def expand_query(text):
+    """
+    Expand the input query words using wordnet corpus dataset
+    :param text: The input query
+    :return Text representing the expanded query
+    """
+    text = text.lower()
+    tokens = word_tokenize(text)
+
+    #Find synonyms to given text using corpus dataset
+    synonyms = []
+    for word in tokens:
+        for syn in wordnet.synsets(word):
+            if len(syn.lemmas()) > 3:
+                for x in range(3):
+                    synonyms.append(syn.lemmas()[x].name())
+            else:
+                for x in range(len(syn.lemmas())):
+                    synonyms.append(syn.lemmas()[x].name())
+
+    # Add synonyms to query
+    for word in synonyms:
+        if word in text:
+            pass
+        else:
+            text += " "
+            text += word
+
+    return text
 
 
 def preprocess(text):
@@ -79,6 +111,7 @@ def calculate_tfidf(query, no_of_docs):
         preprocessed_documents.append(preprocess(document))
 
     #Preprocess Query
+    query = expand_query(query)
     preprocessed_query = preprocess(query)
 
     query = preprocessed_query
@@ -175,5 +208,5 @@ def calculate_tfidf(query, no_of_docs):
 
 
 if __name__ == "__main__":
-    query = 'awesome'
+    query = 'web development'
     print(calculate_tfidf(query, 3))
