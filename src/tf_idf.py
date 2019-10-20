@@ -61,11 +61,12 @@ def preprocess(text):
     return words_stemmed
 
 
-def calculate_tfidf(query):
+def calculate_tfidf(query, no_of_docs):
     """
     Calculates the tf-idf score between the query and each document and returns them
     :param query: The text which is to be compared with other documents
     :param documents: An array of documents
+    :param no_of_docs: Required number of search results to be returned
     :return An array containing scores based on comparision of query with each document
     """    
 
@@ -146,14 +147,33 @@ def calculate_tfidf(query):
         documents_vector.append(doc_vector)
 
     #Calculate cosine similarity for each document
-    result = []
+    scores = []
     for vector in documents_vector:
         score = np.dot(vector, query_vector)
-        result.append(score)
+        scores.append(score)
+
+    file_dir = os.listdir(CORPUS)
+    file_dir.sort()
+
+    # Save tuple of form (score, document name) in an array
+    document_scores = []
+    for x in range(len(file_dir)):
+        document_scores.append((scores[x], file_dir[x]))
+
+    document_scores.sort(reverse=True)
+
+    # Return k ranked documents (k = no_of_docs)
+    result = []
+    if len(document_scores) < no_of_docs:
+        for x in range(len(document_scores)):
+            result.append(document_scores[x])
+    else:
+        for x in range(no_of_docs):
+            result.append(document_scores[x])
 
     return result
 
 
 if __name__ == "__main__":
     query = 'awesome'
-    print(calculate_tfidf(query))
+    print(calculate_tfidf(query, 3))
