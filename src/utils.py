@@ -1,5 +1,8 @@
-CORPUS = '../corpus'
-INDEX_PATH = '../indexes/'
+import os
+
+cwd = os.getcwd()
+CORPUS = cwd + '/corpus'
+INDEX_PATH = cwd + '/indexes/'
 PARSED_DOC_FILE = 'read_doc'
 sites = [
     "https://github.com/search?p={}&q=stars%3A%3E0&s=stars&type=Repositories",  \
