@@ -1,4 +1,5 @@
 from src.tf_idf import calculate_tfidf
+from src.summarize import generate_summary
 
 
 def main():
@@ -17,6 +18,9 @@ def main():
 
         for index, (score, result) in enumerate(result):
             print (index+1, result)
+            print("Summary : ")
+            print(generate_summary(result))
+            print("____________________________________________________________")
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ from nltk import *
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 from collections import Counter
+import string
 
 
 def preprocess(text):
@@ -13,6 +14,7 @@ def preprocess(text):
 
     #Tokenize
     text = text.lower()
+    text = text.translate(str.maketrans("","", string.punctuation))
     tokens = word_tokenize(text)
 
     #Filter Stopwords
