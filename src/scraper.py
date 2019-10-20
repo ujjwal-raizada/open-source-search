@@ -40,6 +40,9 @@ def get_document(repo_id):
             time.sleep(15)
         get_document(repo_id)
     
+    elif (resp.status_code == 404):
+        return 1
+
     else :
         print (requests.get(url=repo_url).status_code)
         print ("There was some error while downloading README. Response Status Code is : ", resp.status_code)
@@ -69,19 +72,15 @@ def get_repo_list(site, index):
         ul_tag = parser.find('ul', {'class' : 'repo-list'})
 
         print ("Getting repo-list from site : {}\n".format(site.format(index)))
-        try:
-            for li_tag in ul_tag.findAll('li'):
-                try:   
-                    repo_id = li_tag.find('h3').get_text().strip('\n')
-                    print ("Found : {}".format(repo_id))
-                    if (get_document(repo_id) == 0):
-                        return 0
-                except:
-                    ## If the tag doesn't contain h3 tag
-                    pass
-        except:
-            ## If ul.findAll('li') returns a None object
-            pass
+        for li_tag in ul_tag.findAll('li'):
+            try:
+                repo_id = li_tag.find('h3').get_text().strip('\n')
+                print ("Found : {}".format(repo_id))
+                if (get_document(repo_id) == 0):
+                    return 0
+            except:
+                ## If the tag doesn't contain h3 tag
+                break
         
         print ("---------------Done--------------------")
 
