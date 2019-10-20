@@ -6,32 +6,14 @@ from collections import Counter
 import math
 import numpy as np
 import os
+import pickle
 
-from .utils import *
-from .preprocessor import preprocess
-
-
-def fetch_documents():
-    """
-    Gets the list of documents and their associated data from the text files in the corpus folder
-    :return array containing data associated with each file in each index, in a sorted fashion
-    """
-    
-    # List of documents
-    file_dir = os.listdir(CORPUS)
-    file_dir.sort()
-    documents = []
-
-    #Save text associated with each file in the array
-    for path in file_dir:
-        reader = open(os.path.join(CORPUS, path))
-        text = ""
-        for line in reader:
-            text += line
-        documents.append(text)
-        reader.close()
-
-    return documents
+try:
+    from .utils import *
+    from .preprocessor import preprocess
+except:
+    from utils import *
+    from preprocessor import preprocess
 
 
 def expand_query(text):
@@ -69,38 +51,24 @@ def calculate_tfidf(query, no_of_docs):
     """
     Calculates the tf-idf score between the query and each document and returns them
     :param query: The text which is to be compared with other documents
-    :param documents: An array of documents
     :param no_of_docs: Required number of search results to be returned
     :return An array containing scores based on comparision of query with each document
     """    
-
-    #Get the list of documents and their data
-    documents = fetch_documents()
-
-    #Preprocess Documents
-    preprocessed_documents = []
-    for document in documents:
-        preprocessed_documents.append(preprocess(document))
-
     #Preprocess Query
     query = expand_query(query)
     preprocessed_query = preprocess(query)
-
     query = preprocessed_query
-    documents = preprocessed_documents
 
-    #Find the list of unique words in the document
-    list_of_words = []
-    for word in query:
-        if word not in list_of_words:
-            list_of_words.append(word)
-    
-    for document in documents:
-        for word in document:
-            if word not in list_of_words:
-                list_of_words.append(word)
+    # Pick up preprocessed data
+    pickle_in = open(PREPROCESSED_DATA, 'rb')
+    db = pickle.load(pickle_in)
+    pickle_in.close()
 
-    N = len(documents) + 1
+    # Get data from database dictionary
+    list_of_words = db['list_of_words']
+    N = db['N']
+    documents_vector = db['documents_vector']
+    documents = db['documents']
 
     #Generate query vector
     query_vector = []
@@ -124,33 +92,7 @@ def calculate_tfidf(query, no_of_docs):
         tfidf = tf*idf
         query_vector.append(tfidf)
 
-    #Generate vector for each document
-    copy_documents = documents
-    documents_vector = []
-    for document in documents:
-        doc_vector = []
-        for word in list_of_words:
-            #Calculate term frequency
-            tf = 0
-            for term in document:
-                if term == word:
-                    tf = tf + 1
-
-            #Calculate document frequency
-            df = 0
-            if word in query:
-                df = df + 1
-            for copy_document in copy_documents:
-                if word in copy_document:
-                    df = df + 1
-            
-            #Calculate tf-idf
-            idf = math.log(N/df)
-            tfidf = tf*idf
-            doc_vector.append(tfidf)
-
-        documents_vector.append(doc_vector)
-
+    
     #Calculate cosine similarity for each document
     scores = []
     for vector in documents_vector:
@@ -180,5 +122,5 @@ def calculate_tfidf(query, no_of_docs):
 
 
 if __name__ == "__main__":
-    query = 'web development'
+    query = 'react'
     print(calculate_tfidf(query, 3))
