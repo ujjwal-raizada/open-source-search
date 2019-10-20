@@ -30,6 +30,7 @@ cd src/
 >>> import nltk
 >>> nltk.download('punkt')
 >>> nltk.download('stopwords')
+>>> nltk.download('wordnet')
 >>> exit()
 ```
 * Run the **search.py** file to make query.

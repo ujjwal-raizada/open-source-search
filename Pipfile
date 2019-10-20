@@ -12,6 +12,7 @@ sphinx = "*"
 pdoc3 = "*"
 requests = "*"
 beautifulsoup4 = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.7"
